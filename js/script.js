@@ -3,7 +3,10 @@ const gallery = document.getElementById("gallery");
 const body = document.querySelector("body");
 
 fetch("https://randomuser.me/api/?results=12").then((response) =>
-  response.json().then((data) => profile(data.results))
+  response.json().then((data) => {
+    profile(data.results);
+    modalProfile(data.results);
+  })
 );
 
 function profile(data) {
@@ -18,21 +21,18 @@ function profile(data) {
     <p class="card-text cap">${data[i].location.city}${data[i].location.state}</p>
 </div>
 </div>`;
-    gallery.insertAdjacentHTML("afterend", galleryContent);
+    gallery.insertAdjacentHTML("beforeend", galleryContent);
   }
-  const searchContent = `<form action="#" method="get">
-  <input type="search" id="search-input" class="search-input" placeholder="Search...">
-  <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-  </form>`;
-  searchContainer.insertAdjacentHTML("afterend", searchContent);
 }
 
-gallery.addEventListener("click", (e) => {
-  const modal = `<div class="modal-container">
+function modalProfile(modaldata) {
+  for (let i = 0; i < modaldata.length; i++) {
+    gallery.addEventListener("click", (e) => {
+      const modal = `<div class="modal-container">
 <div class="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
     <div class="modal-info-container">
-        <img class="modal-img" src="" alt="profile picture">
+        <img class="modal-img" src="${modaldata[i].picture.medium}" alt="profile picture">
         <h3 id="name" class="modal-name cap">name</h3>
         <p class="modal-text">email</p>
         <p class="modal-text cap">city</p>
@@ -42,5 +42,17 @@ gallery.addEventListener("click", (e) => {
         <p class="modal-text">Birthday: 10/21/2015</p>
     </div>
 </div>`;
-  body.insertAdjacentHTML("afterend", modal);
+      body.insertAdjacentHTML("afterend", modal);
+    });
+  }
+}
+
+body.addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON") modal.style.display = "none";
 });
+
+const searchContent = `<form action="#" method="get">
+<input type="search" id="search-input" class="search-input" placeholder="Search...">
+<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+</form>`;
+searchContainer.insertAdjacentHTML("afterend", searchContent);
