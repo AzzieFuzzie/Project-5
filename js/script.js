@@ -6,6 +6,7 @@ fetch("https://randomuser.me/api/?results=12").then((response) =>
   response.json().then((data) => {
     profile(data.results);
     modalProfile(data.results);
+    console.log(data.results);
   })
 );
 
@@ -24,35 +25,35 @@ function profile(data) {
     gallery.insertAdjacentHTML("beforeend", galleryContent);
   }
 }
-
+let modal = " ";
 function modalProfile(modaldata) {
   for (let i = 0; i < modaldata.length; i++) {
     gallery.addEventListener("click", (e) => {
-      const modal = `<div class="modal-container">
+      modal = `<div class="modal-container">
 <div class="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
     <div class="modal-info-container">
         <img class="modal-img" src="${modaldata[i].picture.medium}" alt="profile picture">
-        <h3 id="name" class="modal-name cap">name</h3>
-        <p class="modal-text">email</p>
-        <p class="modal-text cap">city</p>
+        <h3 id="name" class="modal-name cap">${modaldata[i].name.first}</h3>
+        <p class="modal-text">${modaldata[i].email}</p>
+        <p class="modal-text cap">${modaldata[i].location.city}</p>
         <hr>
-        <p class="modal-text">(555) 555-5555</p>
-        <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-        <p class="modal-text">Birthday: 10/21/2015</p>
+        <p class="modal-text">${modaldata[i].cell}</p>
+        <p class="modal-text">${modaldata[i].location.street}</p>
+        <p class="modal-text">${modaldata[i].dob.date}</p>
     </div>
 </div>`;
-      body.insertAdjacentHTML("afterend", modal);
+
+      body.insertAdjacentHTML("beforeEnd", modal);
+      body.addEventListener("click", (e) => {
+        if (e.target.tagName === "BUTTON") modal.style.display = "none";
+      });
     });
   }
 }
-
-body.addEventListener("click", (e) => {
-  if (e.target.tagName === "BUTTON") modal.style.display = "none";
-});
 
 const searchContent = `<form action="#" method="get">
 <input type="search" id="search-input" class="search-input" placeholder="Search...">
 <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
 </form>`;
-searchContainer.insertAdjacentHTML("afterend", searchContent);
+searchContainer.insertAdjacentHTML("afterEnd", searchContent);
