@@ -26,30 +26,32 @@ function profile(data) {
   }
 }
 let modal = " ";
-function modalProfile(modaldata) {
-  for (let i = 0; i < modaldata.length; i++) {
+function modalProfile(profile) {
+  profile.map((result) => {
     gallery.addEventListener("click", (e) => {
       modal = `<div class="modal-container">
 <div class="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
     <div class="modal-info-container">
-        <img class="modal-img" src="${modaldata[i].picture.medium}" alt="profile picture">
-        <h3 id="name" class="modal-name cap">${modaldata[i].name.first}</h3>
-        <p class="modal-text">${modaldata[i].email}</p>
-        <p class="modal-text cap">${modaldata[i].location.city}</p>
+        <img class="modal-img" src="${result.picture.medium}" alt="profile picture">
+        <h3 id="name" class="modal-name cap">${result.name.first}</h3>
+        <p class="modal-text">${result.email}</p>
+        <p class="modal-text cap">${result.location.city}</p>
         <hr>
-        <p class="modal-text">${modaldata[i].cell}</p>
-        <p class="modal-text">${modaldata[i].location.street}</p>
-        <p class="modal-text">${modaldata[i].dob.date}</p>
+        <p class="modal-text">${result.cell}</p>
+        <p class="modal-text">${result.location.street}</p>
+        <p class="modal-text">${result.dob.date}</p>
     </div>
 </div>`;
-
       body.insertAdjacentHTML("beforeEnd", modal);
-      body.addEventListener("click", (e) => {
-        if (e.target.tagName === "BUTTON") modal.style.display = "none";
-      });
     });
-  }
+
+    const popUp = document.querySelectorAll(".modal-container");
+    console.log(popUp);
+    body.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") body.removeChild(popUp);
+    });
+  });
 }
 
 const searchContent = `<form action="#" method="get">
