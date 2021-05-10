@@ -45,7 +45,7 @@ function modalProfile(data) {
 </div>`;
       gallery.insertAdjacentHTML("beforeEnd", modal);
       const popUP = document.querySelector(".modal-container");
-      if (e.target.tagName === "BUTTON") body.removeChild(p);
+      if (e.target.tagName === "BUTTON") body.removeChild(popUP);
     });
   }
 }
