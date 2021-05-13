@@ -4,13 +4,14 @@ const body = document.querySelector("body");
 
 fetch("https://randomuser.me/api/?results=12").then((response) =>
   response.json().then((data) => {
-    profile(data.results);
+    generateProfile(data.results);
     modalProfile(data.results);
+    PopUp(data.results);
     console.log(data.results);
   })
 );
 
-function profile(data) {
+function generateProfile(data) {
   for (let i = 0; i < data.length; i++) {
     const galleryContent = `  <div class="card">
 <div class="card-img-container">
@@ -25,27 +26,48 @@ function profile(data) {
     gallery.insertAdjacentHTML("beforeend", galleryContent);
   }
 }
-let modal = " ";
+
 function modalProfile(data) {
-  for (let i = 0; i < data.length; i++) {
-    gallery.addEventListener("click", (e) => {
-      modal = `<div class="modal-container">
+  modal = `<div class="modal-container">
 <div class="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-    <div class="modal-info-container">
-        <img class="modal-img" src="${data[i].picture.medium}" alt="profile picture">
-        <h3 id="name" class="modal-name cap">${data[i].name.first}</h3>
-        <p class="modal-text">${data[i].email}</p>
-        <p class="modal-text cap">${data[i].location.city}</p>
-        <hr>
-        <p class="modal-text">${data[i].cell}</p>
-        <p class="modal-text">${data[i].location.street}</p>
-        <p class="modal-text">${data[i].dob.date}</p>
-    </div>
-</div>`;
-      gallery.insertAdjacentHTML("beforeEnd", modal);
-      const popUP = document.querySelector(".modal-container");
-      if (e.target.tagName === "BUTTON") gallery.removeChild(modal);
+    </div> `;
+  gallery.insertAdjacentHTML("afterend", modal);
+  const modalContainer = document.querySelector(".modal-container");
+  const modalClose = document.querySelector("#modal-close-btn");
+  modalContainer.style.display = "none";
+  modalClose.addEventListener("click", (e) => {
+    modalContainer.style.display = "none";
+  });
+}
+
+function employeeModal(employeeInfo) {
+  `<div class="modal-info-container">
+  <img class="modal-img" src="${employeeInfo.picture.large}" alt="profile picture">
+  <h3 id="name" class="modal-name cap">${employeeInfo.name.first}</h3>
+  <p class="modal-text">${employeeInfo.email}</p>
+  <p class="modal-text cap">${employeeInfo.location.city}</p>
+  <hr>
+  <p class="modal-text">${employeeInfo.cell}</p>
+  <p class="modal-text">${employeeInfo.location.street}</p>
+  <p class="modal-text">${employeeInfo.dob.date}</p>
+</div>
+`;
+  const infoContainer = (document.querySelector(
+    "#modal-info-container"
+  ).innerHTML = " ");
+  const modalContainer = document.querySelector(".modal-container");
+  modalContainer.insertAdjacentElement("afterbegin", infoContainer);
+}
+
+function PopUp(info) {
+  const cards1 = document.querySelectorAll(".cards");
+  console.log(cards1);
+  for (let i = 0; i < cards1.length; i++) {
+    cards[i].addEventListener("click", (e) => {
+      const modalContainer = document.querySelector(".modal-container");
+      modalContainer.style.display = "inherit";
+      employeeModal(cards[i]);
     });
   }
 }
