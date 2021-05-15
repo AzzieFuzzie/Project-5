@@ -7,6 +7,7 @@ fetch("https://randomuser.me/api/?results=12").then((response) =>
     generateProfile(data.results);
     modalProfile(data.results);
     PopUp(data.results);
+    employeeModal(data.results);
     console.log(data.results);
   })
 );
@@ -41,33 +42,34 @@ function modalProfile(data) {
   });
 }
 
-function employeeModal(employeeInfo) {
-  `<div class="modal-info-container">
-  <img class="modal-img" src="${employeeInfo.picture.large}" alt="profile picture">
-  <h3 id="name" class="modal-name cap">${employeeInfo.name.first}</h3>
-  <p class="modal-text">${employeeInfo.email}</p>
-  <p class="modal-text cap">${employeeInfo.location.city}</p>
+function employeeModal(info) {
+  for (let i = 0; i < info.length; i++) {
+    `<div class="modal-info-container">
+  <img class="modal-img" src="${info[i].large}" alt="profile picture">
+  <h3 id="name" class="modal-name cap">${info[i].name.first}</h3>
+  <p class="modal-text">${info[i].location.city}</p>
   <hr>
-  <p class="modal-text">${employeeInfo.cell}</p>
-  <p class="modal-text">${employeeInfo.location.street}</p>
-  <p class="modal-text">${employeeInfo.dob.date}</p>
+  <p class="modal-text">${info[i].cell}</p>
+  <p class="modal-text">${info[i].location.street}</p>
+  <p class="modal-text">${info[i].dob.date}</p>
 </div>
 `;
-  const infoContainer = (document.querySelector(
+  }
+  const infoContainer = (document.querySelectorAll(
     "#modal-info-container"
   ).innerHTML = " ");
   const modalContainer = document.querySelector(".modal-container");
-  modalContainer.insertAdjacentElement("afterbegin", infoContainer);
+  modalContainer.insertAdjacentHTML("afterbegin", infoContainer);
 }
 
 function PopUp(info) {
-  const cards1 = document.querySelectorAll(".cards");
+  const cards1 = document.querySelectorAll(".card");
   console.log(cards1);
   for (let i = 0; i < cards1.length; i++) {
-    cards[i].addEventListener("click", (e) => {
+    cards1[i].addEventListener("click", (e) => {
       const modalContainer = document.querySelector(".modal-container");
-      modalContainer.style.display = "inherit";
-      employeeModal(cards[i]);
+      modalContainer.style.display = "block";
+      employeeModal();
     });
   }
 }
