@@ -42,16 +42,16 @@ function modalProfile(data) {
   });
 }
 
-function employeeModal(info) {
-  for (let i = 0; i < info.length; i++) {
+function employeeModal(data) {
+  for (let i = 0; i < data.length; i++) {
     `<div class="modal-info-container">
-  <img class="modal-img" src="${info[i].large}" alt="profile picture">
-  <h3 id="name" class="modal-name cap">${info[i].name.first}</h3>
-  <p class="modal-text">${info[i].location.city}</p>
+  <img class="modal-img" src="${data[i].picture.large}" alt="profile picture">
+  <h3 id="name" class="modal-name cap">${data[i].name.first}</h3>
+  <p class="modal-text">${data[i].location.city}</p>
   <hr>
-  <p class="modal-text">${info[i].cell}</p>
-  <p class="modal-text">${info[i].location.street}</p>
-  <p class="modal-text">${info[i].dob.date}</p>
+  <p class="modal-text">${data[i].cell}</p>
+  <p class="modal-text">${data[i].location.street}</p>
+  <p class="modal-text">${data[i].dob.date}</p>
 </div>
 `;
   }
@@ -61,15 +61,14 @@ function employeeModal(info) {
   const modalContainer = document.querySelector(".modal-container");
   modalContainer.insertAdjacentHTML("afterbegin", infoContainer);
 }
-
 function PopUp(info) {
   const cards1 = document.querySelectorAll(".card");
   console.log(cards1);
   for (let i = 0; i < cards1.length; i++) {
     cards1[i].addEventListener("click", (e) => {
       const modalContainer = document.querySelector(".modal-container");
+
       modalContainer.style.display = "block";
-      employeeModal();
     });
   }
 }
