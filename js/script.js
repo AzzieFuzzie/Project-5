@@ -51,13 +51,13 @@ gallery.addEventListener("click", (e) => {
         </div>
     </div>`;
 
-  gallery.insertAdjacentHTML("afterend", modal);
+  gallery.insertAdjacentHTML("beforeend", modal);
 });
 
 // close modal
 
 gallery.addEventListener("click", (e) => {
-  const modalClose = document.querySelectorAll("#modal-close-btn");
+  const modalClose = document.querySelector("#modal-close-btn");
 
   const modalContainer = document.querySelector(".modal-container");
   if (e.target === modalClose) modalContainer.style.display = "none";
