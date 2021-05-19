@@ -1,16 +1,16 @@
-// function modalProfile(data) {
-//   modal = `<div class="modal-container">
-// <div class="modal">
-//     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-//     </div> `;
-//   gallery.insertAdjacentHTML("afterend", modal);
-//   const modalContainer = document.querySelector(".modal-container");
-//   const modalClose = document.querySelector("#modal-close-btn");
-//   modalContainer.style.display = "none";
-//   modalClose.addEventListener("click", (e) => {
-//     modalContainer.style.display = "none";
-//   });
-// }
+function modalProfile(data) {
+  modal = `<div class="modal-container">
+<div class="modal">
+    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+    </div> `;
+  gallery.insertAdjacentHTML("afterend", modal);
+  const modalContainer = document.querySelector(".modal-container");
+  const modalClose = document.querySelector("#modal-close-btn");
+  modalContainer.style.display = "none";
+  modalClose.addEventListener("click", (e) => {
+    modalContainer.style.display = "none";
+  });
+}
 // function employeeModal() {
 //   `<div class="modal-info-container">
 //     <img class="modal-img" src="${picture.large}" alt="profile picture">
@@ -23,20 +23,23 @@
 //   </div>
 //   `;
 
-//   const infoContainer = (document.querySelectorAll(
-//     "#modal-info-container"
-//   ).innerHTML = " ");
-//   const modalContainer = document.querySelector(".modal-container");
-//   modalContainer.insertAdjacentHTML("afterbegin", infoContainer);
-// }
-// function PopUp(info) {
-//   const cards1 = document.querySelectorAll(".card");
-//   console.log(cards1);
-//   for (let i = 0; i < cards1.length; i++) {
-//     cards1[i].addEventListener("click", (e) => {
-//       const modalContainer = document.querySelector(".modal-container");
+// const infoContainer = (document.querySelectorAll(
+//   "#modal-info-container"
+// ).innerHTML = " ");
+// const modalContainer = document.querySelector(".modal-container");
+// modalContainer.insertAdjacentHTML("afterbegin", infoContainer);
 
-//       modalContainer.style.display = "block";
-//     });
-//   }
-// }
+function PopUp() {
+  const cards1 = document.querySelectorAll(".card");
+  console.log(cards1);
+  for (let i = 0; i < cards1.length; i++) {
+    cards1[i].addEventListener("click", (e) => {
+      const modalContainer = document.querySelector(".modal-container");
+
+      modalContainer.style.display = "block";
+    });
+  }
+}
+
+// employeeModal();
+PopUp();
