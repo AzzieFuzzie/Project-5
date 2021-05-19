@@ -35,8 +35,8 @@ function generateProfile(data) {
 gallery.addEventListener("click", (e) => {
   const cards = document.querySelectorAll(".card");
   console.log(cards);
-  for (let i = 0; i < cards.length; i++) {
-    const modal = `<div class="modal-container">
+  // for (let i = 0; i < cards.length; i++) {
+  const modal = `<div class="modal-container">
     <div class="modal">
         <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
         <div class="modal-info-container">
@@ -51,8 +51,8 @@ gallery.addEventListener("click", (e) => {
         </div>
     </div>`;
 
-    gallery.insertAdjacentHTML("afterend", modal);
-  }
+  gallery.insertAdjacentHTML("afterend", modal);
+  // }
 });
 
 // close modal
