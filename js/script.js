@@ -60,6 +60,8 @@ function modal(data) {
   }
 }
 
+// Closes modal when x is clicked
+
 function closeModal() {
   const modalClose = document.querySelectorAll('#modal-close-btn');
   for (let i = 0; i < modalClose.length; i++) {
@@ -71,7 +73,8 @@ function closeModal() {
   }
 }
 
-// modal close test
+// Close modal test
+
 // gallery.addEventListener('click', (e) => {
 //   const modalContainer = document.querySelector('.modal-container');
 //   const modalClose = document.querySelector('#modal-close-btn');
