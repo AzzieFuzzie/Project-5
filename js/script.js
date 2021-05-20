@@ -66,9 +66,9 @@ function closeModal() {
   console.log(cards);
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', (e) => {
-      const modalClose = document.querySelector('#modal-close-btn');
+      const modalClose = document.querySelectorAll('#modal-close-btn');
       console.log(modalClose);
-      const modalContainer = document.querySelector('.modal-container');
+      const modalContainer = document.querySelectorAll('.modal-container');
       console.log(modalContainer);
       if (e.target === modalClose) modalContainer.style.display = 'none';
     });
