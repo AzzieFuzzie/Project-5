@@ -59,7 +59,6 @@ function modal(data) {
     }
   }
 }
-// close modal
 
 function closeModal() {
   const modalClose = document.querySelectorAll('#modal-close-btn');
@@ -71,6 +70,18 @@ function closeModal() {
     });
   }
 }
+
+// modal close test
+// gallery.addEventListener('click', (e) => {
+//   const modalContainer = document.querySelector('.modal-container');
+//   const modalClose = document.querySelector('#modal-close-btn');
+//   console.log(modalContainer);
+//   if (e.target === modalClose) {
+//     console.log(e.target);
+//     console.log('succes');
+//     modalContainer.style.display = 'none';
+//   }
+// });
 
 // Template literal for search bar
 const searchContent = `<form action="#" method="get">
