@@ -62,15 +62,12 @@ function modal(data) {
 // close modal
 
 function closeModal() {
-  const cards = document.querySelectorAll('.card');
-  console.log(cards);
-  for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener('click', (e) => {
-      const modalClose = document.querySelectorAll('#modal-close-btn');
-      console.log(modalClose);
+  const modalClose = document.querySelectorAll('#modal-close-btn');
+  for (let i = 0; i < modalClose.length; i++) {
+    modalClose[i].addEventListener('click', (e) => {
       const modalContainer = document.querySelectorAll('.modal-container');
       console.log(modalContainer);
-      if (e.target === modalClose) modalContainer.style.display = 'none';
+      modalContainer.style.display = 'none';
     });
   }
 }
