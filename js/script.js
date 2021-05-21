@@ -39,9 +39,9 @@ function modalTemplate() {
   <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
   </div>
   </div>`;
-  const modalInfoContainer = (document.querySelectorAll(
-    '#modal-info-container'
-  ).innerHTML = ' ');
+  // const modalInfoContainer = (document.querySelectorAll(
+  //   '#modal-info-container'
+  // ).innerHTML = ' ');
   gallery.insertAdjacentHTML('afterend', modal);
 }
 // Creates modal info based on employee
@@ -73,6 +73,3 @@ function PopUp() {
     });
   }
 }
-
-// const modalContainer = document.querySelector('.modal-container');
-// modalContainer.insertAdjacentHTML('afterbegin', infoContainer);
