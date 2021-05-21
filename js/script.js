@@ -8,8 +8,9 @@ fetch('https://randomuser.me/api/?results=12')
   .then((response) => response.json())
   .then((data) => {
     generateProfile(data.results);
-    modal(data.results);
-    closeModal();
+    modalTemplate();
+    employeeModal(data.results);
+    PopUp();
     console.log(data.results);
   });
 
@@ -31,64 +32,47 @@ function generateProfile(info) {
     gallery.insertAdjacentHTML('beforeend', galleryContent);
   }
 }
-
-// Event listener for modal and then generates the modal
-
-function modal(data) {
+// Creates a modal template
+function modalTemplate() {
+  const modal = `<div class="modal-container">
+  <div class="modal">
+  <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+  </div>
+  </div>`;
+  const modalInfoContainer = (document.querySelectorAll(
+    '#modal-info-container'
+  ).innerHTML = ' ');
+  gallery.insertAdjacentHTML('afterend', modal);
+}
+// Creates modal info based on employee
+function employeeModal(data) {
   for (let i = 0; i < data.length; i++) {
-    const cards = document.querySelectorAll('.card');
-    for (let i = 0; i < cards.length; i++) {
-      cards[i].addEventListener('click', (e) => {
-        const modal = `<div class="modal-container">
-        <div class="modal">
-            <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-            <div class="modal-info-container">
-                <img class="modal-img" src="${data[i].picture.large}" alt="profile picture">
-                <h3 id="name" class="modal-name cap"></h3>
-                <p class="modal-text">${data[i].email}</p>
-                <p class="modal-text cap">${data[i].location.city}</p>
-                <hr>
-                <p class="modal-text">${data[i].cell}</p>
-                <p class="modal-text">${data[i].location.city}${data[i].location.state}</p>
-                <p class="modal-text">${data[i].registered.date}</p>
-            </div>
-            </div>
-        </div>`;
-        gallery.insertAdjacentHTML('afterbegin', modal);
-      });
-    }
+    const modalInfo = `<div class="modal-info-container">
+    <img class="modal-img" src="${data[i].picture.large}" alt="profile picture">
+    <h3 id="name" class="modal-name cap">${data[i].name.first}</h3>
+    <p class="modal-text">${data[i].location.city}</p>
+    <hr>
+    <p class="modal-text">${data[i].cell}</p>
+    <p class="modal-text">${data[i].location.street}</p>
+    <p class="modal-text">${data[i].dob.date}</p>
+  </div>
+  `;
+
+    const modalContainer = document.querySelector('.modal-container');
+    modalContainer.style.display = 'none';
+    modalContainer.insertAdjacentHTML('beforeend', modalInfo);
   }
 }
 
-// Closes modal when x is clicked
-
-function closeModal() {
-  const modalClose = document.querySelectorAll('#modal-close-btn');
-  for (let i = 0; i < modalClose.length; i++) {
-    modalClose[i].addEventListener('click', (e) => {
-      const modalContainer = document.querySelectorAll('.modal-container');
-      console.log(modalContainer);
-      modalContainer.style.display = 'none';
+function PopUp() {
+  const cards = document.querySelectorAll('.card');
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', (e) => {
+      const modalContainer = document.querySelector('.modal-container');
+      modalContainer.style.display = 'block';
     });
   }
 }
 
-// Close modal test
-
-// gallery.addEventListener('click', (e) => {
-//   const modalContainer = document.querySelector('.modal-container');
-//   const modalClose = document.querySelector('#modal-close-btn');
-//   console.log(modalContainer);
-//   if (e.target === modalClose) {
-//     console.log(e.target);
-//     console.log('succes');
-//     modalContainer.style.display = 'none';
-//   }
-// });
-
-// Template literal for search bar
-const searchContent = `<form action="#" method="get">
-<input type="search" id="search-input" class="search-input" placeholder="Search...">
-<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-</form>`;
-searchContainer.insertAdjacentHTML('afterEnd', searchContent);
+// const modalContainer = document.querySelector('.modal-container');
+// modalContainer.insertAdjacentHTML('afterbegin', infoContainer);
