@@ -11,6 +11,7 @@ fetch('https://randomuser.me/api/?results=12')
     modalTemplate();
     employeeModal(data.results);
     PopUp();
+    closeModal();
     console.log(data.results);
   });
 
@@ -51,22 +52,26 @@ function employeeModal(data) {
     const cell = data[i].cell;
     const date = data[i].dob.date;
     const name = data[i].name.first;
+    function dataInfo() {
+      const modalInfo = `<div class="modal-info-container">
+      <img class="modal-img" src="${picture}" alt="profile picture">
+      <h3 id="name" class="modal-name cap">${name}</h3>
+      <p class="modal-text">${location}</p>
+      <hr>
+      <p class="modal-text">${cell}</p>
+      <p class="modal-text">${date}</p>
+      <p class="modal-text">${name}</p>
+    </div>
+    `;
+      console.log(modalInfo);
+      const modalDiv = document.querySelector('.modal');
+      const modalContainer = document.querySelector('.modal-container');
+      modalContainer.style.display = 'none';
+      modalDiv.insertAdjacentHTML('beforeend', modalInfo);
+    }
   }
-  const modalInfo = `<div class="modal-info-container">
-    <img class="modal-img" src="${picture}" alt="profile picture">
-    <h3 id="name" class="modal-name cap">${name}</h3>
-    <p class="modal-text">${data[i].location.city}</p>
-    <hr>
-    <p class="modal-text">${data[i].cell}</p>
-    <p class="modal-text">${data[i].location.street}</p>
-    <p class="modal-text">${data[i].dob.date}</p>
-  </div>
-  `;
-  console.log(modalInfo);
-  const modalDiv = document.querySelector('.modal');
-  const modalContainer = document.querySelector('.modal-container');
-  modalContainer.style.display = 'none';
-  modalDiv.insertAdjacentHTML('beforeend', modalInfo);
+
+  dataInfo();
 }
 
 // Adds event listeners to cards to display modal
@@ -79,4 +84,12 @@ function PopUp() {
       modalContainer.style.display = 'block';
     });
   }
+}
+
+function closeModal() {
+  const modalClose = document.querySelector('#modal-close-btn');
+  modalClose.addEventListener('click', (e) => {
+    const modalContainer = document.querySelector('.modal-container');
+    modalContainer.style.display = 'none';
+  });
 }
