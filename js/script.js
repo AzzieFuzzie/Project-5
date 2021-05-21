@@ -58,9 +58,9 @@ function employeeModal(data, generateProfile) {
   </div>
   `;
       console.log(modalInfo);
-      const modalContainer = document.querySelector('.modal');
+      const modalDiv = document.querySelector('.modal');
       // modalContainer.style.display = 'none';
-      modalContainer.insertAdjacentHTML('beforeend', modalInfo);
+      modalDiv.insertAdjacentHTML('beforeend', modalInfo);
     }
   }
 }
