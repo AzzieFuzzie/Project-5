@@ -39,16 +39,15 @@ function modalTemplate() {
   <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
   </div>
   </div>`;
-  // const modalInfoContainer = (document.querySelectorAll(
-  //   '#modal-info-container'
-  // ).innerHTML = ' ');
+
   gallery.insertAdjacentHTML('afterend', modal);
 }
 
 // Creates modal info based on employee
-function employeeModal(data) {
+function employeeModal(data, generateProfile) {
   for (let i = 0; i < data.length; i++) {
-    const modalInfo = `<div class="modal-info-container">
+    if (data[i] === generateProfile) {
+      const modalInfo = `<div class="modal-info-container">
     <img class="modal-img" src="${data[i].picture.large}" alt="profile picture">
     <h3 id="name" class="modal-name cap">${data[i].name.first}</h3>
     <p class="modal-text">${data[i].location.city}</p>
@@ -58,10 +57,11 @@ function employeeModal(data) {
     <p class="modal-text">${data[i].dob.date}</p>
   </div>
   `;
-
-    const modalContainer = document.querySelector('.modal-container');
-    modalContainer.style.display = 'none';
-    modalContainer.insertAdjacentHTML('beforeend', modalInfo);
+      console.log(modalInfo);
+      const modalContainer = document.querySelector('.modal');
+      // modalContainer.style.display = 'none';
+      modalContainer.insertAdjacentHTML('beforeend', modalInfo);
+    }
   }
 }
 
