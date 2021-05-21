@@ -44,12 +44,17 @@ function modalTemplate() {
 }
 
 // Creates modal info based on employee
-function employeeModal(data, generateProfile) {
+function employeeModal(data) {
   for (let i = 0; i < data.length; i++) {
-    if (data[i] === generateProfile) {
-      const modalInfo = `<div class="modal-info-container">
-    <img class="modal-img" src="${data[i].picture.large}" alt="profile picture">
-    <h3 id="name" class="modal-name cap">${data[i].name.first}</h3>
+    const picture = data[i].picture.large;
+    const location = data[i].location.street;
+    const cell = data[i].cell;
+    const date = data[i].dob.date;
+    const name = data[i].name.first;
+  }
+  const modalInfo = `<div class="modal-info-container">
+    <img class="modal-img" src="${picture}" alt="profile picture">
+    <h3 id="name" class="modal-name cap">${name}</h3>
     <p class="modal-text">${data[i].location.city}</p>
     <hr>
     <p class="modal-text">${data[i].cell}</p>
@@ -57,12 +62,11 @@ function employeeModal(data, generateProfile) {
     <p class="modal-text">${data[i].dob.date}</p>
   </div>
   `;
-      console.log(modalInfo);
-      const modalDiv = document.querySelector('.modal');
-      // modalContainer.style.display = 'none';
-      modalDiv.insertAdjacentHTML('beforeend', modalInfo);
-    }
-  }
+  console.log(modalInfo);
+  const modalDiv = document.querySelector('.modal');
+  const modalContainer = document.querySelector('.modal-container');
+  modalContainer.style.display = 'none';
+  modalDiv.insertAdjacentHTML('beforeend', modalInfo);
 }
 
 // Adds event listeners to cards to display modal
@@ -71,6 +75,7 @@ function PopUp() {
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', (e) => {
       const modalContainer = document.querySelector('.modal-container');
+      console.log(modalContainer);
       modalContainer.style.display = 'block';
     });
   }
