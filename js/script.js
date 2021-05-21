@@ -15,7 +15,6 @@ fetch('https://randomuser.me/api/?results=12')
   });
 
 // Generates the profile with template literal using data from api
-
 function generateProfile(info) {
   for (let i = 0; i < info.length; i++) {
     const galleryContent = `  <div class="card" >
@@ -32,6 +31,7 @@ function generateProfile(info) {
     gallery.insertAdjacentHTML('beforeend', galleryContent);
   }
 }
+
 // Creates a modal template
 function modalTemplate() {
   const modal = `<div class="modal-container">
@@ -44,6 +44,7 @@ function modalTemplate() {
   // ).innerHTML = ' ');
   gallery.insertAdjacentHTML('afterend', modal);
 }
+
 // Creates modal info based on employee
 function employeeModal(data) {
   for (let i = 0; i < data.length; i++) {
@@ -64,6 +65,7 @@ function employeeModal(data) {
   }
 }
 
+// Adds event listeners to cards to display modal
 function PopUp() {
   const cards = document.querySelectorAll('.card');
   for (let i = 0; i < cards.length; i++) {
