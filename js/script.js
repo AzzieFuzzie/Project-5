@@ -47,13 +47,14 @@ function modalTemplate() {
 // Creates modal info based on employee
 function employeeModal(data) {
   for (let i = 0; i < data.length; i++) {
-    const picture = data[i].picture.large;
-    const location = data[i].location.street;
-    const cell = data[i].cell;
-    const date = data[i].dob.date;
-    const name = data[i].name.first;
-    function dataInfo() {
-      const modalInfo = `<div class="modal-info-container">
+    if (data[i] === data.results) {
+      let picture = data[i].picture.large;
+      let location = data[i].location.street.name;
+      let cell = data[i].cell;
+      let date = data[i].dob.date;
+      let name = data[i].name.first;
+      function dataInfo() {
+        const modalInfo = `<div class="modal-info-container">
       <img class="modal-img" src="${picture}" alt="profile picture">
       <h3 id="name" class="modal-name cap">${name}</h3>
       <p class="modal-text">${location}</p>
@@ -63,15 +64,15 @@ function employeeModal(data) {
       <p class="modal-text">${name}</p>
     </div>
     `;
-      console.log(modalInfo);
-      const modalDiv = document.querySelector('.modal');
-      const modalContainer = document.querySelector('.modal-container');
-      modalContainer.style.display = 'none';
-      modalDiv.insertAdjacentHTML('beforeend', modalInfo);
+        console.log(modalInfo);
+        const modalDiv = document.querySelector('.modal');
+        const modalContainer = document.querySelector('.modal-container');
+        modalContainer.style.display = 'none';
+        modalDiv.insertAdjacentHTML('beforeend', modalInfo);
+      }
+      dataInfo();
     }
   }
-
-  dataInfo();
 }
 
 // Adds event listeners to cards to display modal
@@ -93,3 +94,13 @@ function closeModal() {
     modalContainer.style.display = 'none';
   });
 }
+
+// function closeModal() {
+//   const modalContainer = document.querySelector('.modal-container');
+//   modalContainer.addEventListener('click', (e) => {
+//     const modalClose = document.querySelector('#modal-close-btn');
+//     if(e.target === modalClose){
+//     modalContainer.style.display = 'none';
+//     }
+//   });
+// }
