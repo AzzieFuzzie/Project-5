@@ -48,7 +48,7 @@ function modalTemplate() {
 // Creates modal info based on employee
 function employeeModal(data, info) {
   for (let i = 0; i < data.length; i++) {
-    if (info[i].email === data[i]) {
+    if (info.email === data[i].email) {
       let picture = data[i].picture.large;
       let location = data[i].location.street.name;
       let cell = data[i].cell;
