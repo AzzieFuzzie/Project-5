@@ -16,6 +16,7 @@ fetch('https://randomuser.me/api/?results=12')
   });
 
 // Generates the profile with template literal using data from api
+
 function generateProfile(info) {
   for (let i = 0; i < info.length; i++) {
     const galleryContent = `  <div class="card" >
@@ -45,14 +46,15 @@ function modalTemplate() {
 }
 
 // Creates modal info based on employee
-function employeeModal(data) {
+function employeeModal(data, info) {
   for (let i = 0; i < data.length; i++) {
-    if (data[i] === data.results) {
+    if (info === data[i]) {
       let picture = data[i].picture.large;
       let location = data[i].location.street.name;
       let cell = data[i].cell;
       let date = data[i].dob.date;
       let name = data[i].name.first;
+
       function dataInfo() {
         const modalInfo = `<div class="modal-info-container">
       <img class="modal-img" src="${picture}" alt="profile picture">
