@@ -9,7 +9,7 @@ fetch('https://randomuser.me/api/?results=12')
   .then((data) => {
     generateProfile(data.results);
     modalTemplate();
-    employeeModal(data.results);
+    employeeModal(data.results, data.results);
     PopUp();
     closeModal();
     console.log(data.results);
@@ -47,8 +47,8 @@ function modalTemplate() {
 
 // Creates modal info based on employee
 function employeeModal(data, info) {
-  for (let i = 0; i < data.length; i++) {
-    if (info.email === data[i].email) {
+  for (let i = 0; i < 1; i++) {
+    if (info[i].email === data[i].email) {
       let picture = data[i].picture.large;
       let location = data[i].location.street.name;
       let cell = data[i].cell;
@@ -66,14 +66,15 @@ function employeeModal(data, info) {
       <p class="modal-text">${name}</p>
     </div>
     `;
+
         console.log(modalInfo);
         const modalDiv = document.querySelector('.modal');
         const modalContainer = document.querySelector('.modal-container');
         modalContainer.style.display = 'none';
         modalDiv.insertAdjacentHTML('beforeend', modalInfo);
       }
-      dataInfo();
     }
+    dataInfo();
   }
 }
 
