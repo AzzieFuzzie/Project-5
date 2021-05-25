@@ -9,8 +9,7 @@ fetch('https://randomuser.me/api/?results=12')
   .then((data) => {
     generateProfile(data.results);
     modalTemplate();
-    employeeModal(data.results, data.results);
-    PopUp();
+    PopUp(data.results);
     closeModal();
     console.log(data.results);
   });
@@ -43,58 +42,59 @@ function modalTemplate() {
   </div>`;
 
   gallery.insertAdjacentHTML('afterend', modal);
+  const modalContainer = document.querySelector('.modal-container');
+  modalContainer.style.display = 'none';
 }
 
 // Creates modal info based on employee
-function employeeModal(data, info) {
-  for (let i = 0; i < 1; i++) {
-    if (info[i].email === data[i].email) {
-      let picture = data[i].picture.large;
-      let location = data[i].location.street.name;
-      let cell = data[i].cell;
-      let date = data[i].dob.date;
-      let name = data[i].name.first;
 
-      function dataInfo() {
-        const modalInfo = `<div class="modal-info-container">
+function employeeModal(data) {
+  let picture = data.picture.large;
+  let location = data.location.street.name;
+  let cell = data.cell;
+  let date = data.dob.date;
+  let name = data.name.first;
+  let email = data.email;
+
+  const modalInfo = `<div class="modal-info-container">
       <img class="modal-img" src="${picture}" alt="profile picture">
       <h3 id="name" class="modal-name cap">${name}</h3>
       <p class="modal-text">${location}</p>
       <hr>
       <p class="modal-text">${cell}</p>
       <p class="modal-text">${date}</p>
-      <p class="modal-text">${name}</p>
+      <p class="modal-text">${email}</p>
     </div>
     `;
 
-        console.log(modalInfo);
-        const modalDiv = document.querySelector('.modal');
-        const modalContainer = document.querySelector('.modal-container');
-        modalContainer.style.display = 'none';
-        modalDiv.insertAdjacentHTML('beforeend', modalInfo);
-      }
-    }
-    dataInfo();
-  }
+  console.log(modalInfo);
+  const modalDiv = document.querySelector('.modal');
+
+  modalDiv.insertAdjacentHTML('beforeend', modalInfo);
 }
 
 // Adds event listeners to cards to display modal
-function PopUp() {
+
+function PopUp(data) {
   const cards = document.querySelectorAll('.card');
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', (e) => {
       const modalContainer = document.querySelector('.modal-container');
-      console.log(modalContainer);
+      employeeModal(data[i]);
       modalContainer.style.display = 'block';
     });
   }
 }
 
+// Closes modal when x button is clicked and clears info container
 function closeModal() {
   const modalClose = document.querySelector('#modal-close-btn');
   modalClose.addEventListener('click', (e) => {
     const modalContainer = document.querySelector('.modal-container');
     modalContainer.style.display = 'none';
+    const modalInfoContainer = document.querySelector('.modal-info-container');
+    modalInfoContainer.innerHTML = ' ';
+    console.log(modalInfoContainer);
   });
 }
 
