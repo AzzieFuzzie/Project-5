@@ -50,20 +50,26 @@ function modalTemplate() {
 
 function employeeModal(data) {
   let picture = data.picture.large;
-  let location = data.location.street.name;
+  let location = data.location.city;
+  let street = data.location.street.name;
   let cell = data.cell;
-  let date = data.dob.date;
+  let birthday = data.dob.date;
   let name = data.name.first;
   let email = data.email;
 
+  let year = new Date(data.dob.date).getFullYear();
+  let month = new Date(birthday).getMonth();
+  let day = new Date(birthday).getDay();
+  console.log(year);
   const modalInfo = `<div class="modal-info-container">
       <img class="modal-img" src="${picture}" alt="profile picture">
       <h3 id="name" class="modal-name cap">${name}</h3>
-      <p class="modal-text">${location}</p>
-      <hr>
-      <p class="modal-text">${cell}</p>
-      <p class="modal-text">${date}</p>
       <p class="modal-text">${email}</p>
+      <hr>
+      <p class="modal-text">${location}</p>
+      <p class="modal-text">${cell}</p>
+      <p class="modal-text">${street}</p>
+      <p class="modal-text">Birthday: ${year} / ${month} / ${day}</p>
     </div>
     `;
 
@@ -93,7 +99,7 @@ function closeModal() {
     const modalContainer = document.querySelector('.modal-container');
     modalContainer.style.display = 'none';
     const modalInfoContainer = document.querySelector('.modal-info-container');
-    modalInfoContainer.innerHTML = ' ';
+    modalInfoContainer.remove();
     console.log(modalInfoContainer);
   });
 }
