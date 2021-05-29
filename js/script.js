@@ -23,9 +23,9 @@ function generateProfile(info) {
     <img class="card-img" src=${info[i].picture.large} alt="profile picture">
 </div>
 <div class="card-info-container">
-    <h3 id="name" class="card-name cap">${info[i].name.first}${info[i].name.last}</h3>
+    <h3 id="name" class="card-name cap">${info[i].name.first} ${info[i].name.last}</h3>
     <p class="card-text">${info[i].email}</p>
-    <p class="card-text cap">${info[i].location.city}${info[i].location.state}</p>
+    <p class="card-text cap">${info[i].location.city}, ${info[i].location.state}</p>
 </div>
 </div>`;
 
@@ -52,6 +52,9 @@ function employeeModal(data) {
   let picture = data.picture.large;
   let location = data.location.city;
   let street = data.location.street.name;
+  let streetNo = data.location.street.number;
+  let streetCountry = data.location.country;
+  let streetCode = data.location.postcode;
   let cell = data.cell;
   let birthday = data.dob.date;
   let name = data.name.first;
@@ -61,15 +64,19 @@ function employeeModal(data) {
   let month = new Date(birthday).getMonth();
   let day = new Date(birthday).getDay();
   console.log(year);
+
   const modalInfo = `<div class="modal-info-container">
       <img class="modal-img" src="${picture}" alt="profile picture">
       <h3 id="name" class="modal-name cap">${name}</h3>
       <p class="modal-text">${email}</p>
-      <hr>
       <p class="modal-text">${location}</p>
-      <p class="modal-text">${cell}</p>
-      <p class="modal-text">${street}</p>
-      <p class="modal-text">Birthday: ${year} / ${month} / ${day}</p>
+      <hr>
+      <p class="modal-text">(${cell.slice(0, 4)}) ${cell.slice(
+    5,
+    9
+  )} ${cell.slice(9, 12)}</p>
+      <p class="modal-text">${streetNo} ${street} ,${streetCountry} ,${streetCode}</p>
+      <p class="modal-text">Birthday: ${month} / ${day} / ${year}</p>
     </div>
     `;
 
