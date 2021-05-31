@@ -8,6 +8,7 @@ fetch('https://randomuser.me/api/?results=12')
   .then((response) => response.json())
   .then((data) => {
     generateProfile(data.results);
+
     modalTemplate();
     PopUp(data.results);
     closeModal();
@@ -56,25 +57,26 @@ function employeeModal(data) {
   let streetCountry = data.location.country;
   let streetCode = data.location.postcode;
   let cell = data.cell;
+  console.log(cell);
   let birthday = data.dob.date;
   let name = data.name.first;
   let email = data.email;
+  let year = birthday.slice(0, 4);
+  let month = birthday.slice(5, 7);
+  let day = birthday.slice(9, 10);
 
-  let year = new Date(data.dob.date).getFullYear();
-  let month = new Date(birthday).getMonth();
-  let day = new Date(birthday).getDay();
-  console.log(year);
-
+  function cellFormat(num) {
+    const regex = /^\D*(\d{3})\D*(\d{3})\D*(\d{4})\D*$/;
+    return cell.replace(regex, `($1) $2-$3`);
+  }
+  cellFormat(cell);
   const modalInfo = `<div class="modal-info-container">
       <img class="modal-img" src="${picture}" alt="profile picture">
       <h3 id="name" class="modal-name cap">${name}</h3>
       <p class="modal-text">${email}</p>
       <p class="modal-text">${location}</p>
       <hr>
-      <p class="modal-text">(${cell.slice(0, 4)}) ${cell.slice(
-    5,
-    9
-  )} ${cell.slice(9, 12)}</p>
+      <p class="modal-text">${cell}</p>
       <p class="modal-text">${streetNo} ${street} ,${streetCountry} ,${streetCode}</p>
       <p class="modal-text">Birthday: ${month} / ${day} / ${year}</p>
     </div>
@@ -94,6 +96,7 @@ function PopUp(data) {
     cards[i].addEventListener('click', (e) => {
       const modalContainer = document.querySelector('.modal-container');
       employeeModal(data[i]);
+
       modalContainer.style.display = 'block';
     });
   }
