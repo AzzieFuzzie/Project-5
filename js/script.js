@@ -67,7 +67,7 @@ function employeeModal(data) {
 
   function cellFormat(num) {
     const regex = /^\D*(\d{3})\D*(\d{3})\D*(\d{4})\D*$/;
-    return cell.replace(regex, `($1) $2-$3`);
+    return cell.replace(regex, '($1) $2-$3');
   }
   cellFormat(cell);
   const modalInfo = `<div class="modal-info-container">
